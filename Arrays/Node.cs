@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Arrays {
 	
-	class Node <T>{
+	class Node <T> where T : IComparable{
 
 		private T _item;
 		private Node<T> _root;

@@ -7,21 +7,18 @@ using System.Threading.Tasks;
 namespace Arrays {
 	class Program {
 		static void Main(string[] args) {
-			Stack<int> s = new Stack<int>();
-			for (int i = 0 ; i < 10 ; i++)
-				s.push(i);
-			Console.WriteLine(s.peek());
-			for (int i = 0 ; i < 10 ; i++)
-				Console.WriteLine(s.pop());
-			for (int i = 0; i < 15; i++)
-				s.push(i);
-			Console.WriteLine(s.peek());
-			for (int i = 0; i < 10; i++)
-				Console.WriteLine(s.pop());
 
-			Console.WriteLine();
-			Console.WriteLine(s.peek());
+			int[] input = new int[] { 20, 5, 6, 1, 98, 6, 120, 7, 25, 32, 12, 16 };
+			BTree<int> tree = new BTree<int>();
+			foreach (int i in input) {
+				tree.Add(i);
+			}
 
+			List<int> output = tree.Read();
+			foreach (int i in output) {
+				Console.WriteLine(i);
+			}
+			Console.WriteLine("done...");
 			Console.ReadKey();
 		}
 	}

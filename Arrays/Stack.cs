@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Arrays {
-	class Stack<T> {
+	class Stack<T> where T : IComparable{
 		//private Node<T> root;
 		private Node<T> head;
 
