@@ -34,7 +34,10 @@ namespace Arrays {
 			root = node;
 			walker = null;
 		}
-
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="item"></param>
 		public void Add(T item) {
 			Add(new BNode<T>(item));
 		}
@@ -89,6 +92,7 @@ namespace Arrays {
 		/**
 		*	dose Left Root Right reading of the tree
 		**/
+	
 		public List<T> Read() {
 			List<T> ret = new List<T>();
 			walker = root;
