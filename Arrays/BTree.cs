@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace Arrays {
-	class BTree<T> where T : IComparable{
+	public class BTree<T> where T : IComparable{
 
 		enum Walk{ LEFT, RIGHT };
 
@@ -34,6 +34,11 @@ namespace Arrays {
 			root = node;
 			walker = null;
 		}
+
+		public List	<T> GetOutput() {
+			return output;
+		}
+
 		/// <summary>
 		/// 
 		/// </summary>
@@ -52,7 +57,7 @@ namespace Arrays {
 					//Console.WriteLine(root.leaves.Any());
 					//root > node
 					if (walker.item.CompareTo(newNode.item) >= 0) {	
-						Console.WriteLine("root.item.CompareTo(node.item) >= 0");		//DEBUG
+						//Console.WriteLine("root.item.CompareTo(node.item) >= 0");		//DEBUG
 						//go Left;
 						if(walker.leaves[(int)Walk.LEFT] != null) {
 							//go deeper!
@@ -69,7 +74,7 @@ namespace Arrays {
                     }
 					//root < node
 					else {	
-						Console.WriteLine("!(root.item.CompareTo(node.item) >= 0)");	//DEBUG
+						//Console.WriteLine("!(root.item.CompareTo(node.item) >= 0)");	//DEBUG
 						//go right
 						if (walker.leaves[(int)Walk.RIGHT] != null) {
 							//go deeper!
@@ -89,73 +94,43 @@ namespace Arrays {
 				root = newNode;
 			}
 		}
-		/**
-		*	dose Left Root Right reading of the tree
-		**/
-	
-		public List<T> Read() {
-			List<T> ret = new List<T>();
-			walker = root;
-			//gose as left as posseble
-			/*while (walker.leaves[(int)Walk.LEFT] != null) {
-				walker = walker.leaves[(int)Walk.LEFT];
-			}*/
-			while (walker.leaves[(int)Walk.RIGHT] != null ) {
-				
-				while (walker.leaves[(int)Walk.LEFT] != null) {
-					walker = walker.leaves[(int)Walk.LEFT];
-				}
-				ret.Add(walker.item);
-				walker = root;
-				ret.Add(walker.item);
-				walker = walker.leaves[(int)Walk.RIGHT];
-			}
-			return ret;
+		
+
+		//TODO add a list in to the mix 
+		//TODO learn about call by ref in oder to handel the list or just send the list along!
+
+		/// <summary>
+		///  preoder reading root left right
+		/// </summary>			
+		public void Preorder() {
+			output = new List<T>();
+			Preorder(root);
 		}
 
-		public void LRR() {
-			walker = root;
-			TLeft();
-			TRoot();
-			TRight();
+		/// <summary>
+		/// give a root to start preoder reading r l r
+		/// </summary>
+		/// <param name="root"></param>
+		public void Preorder(Node<T> root) {
+			if (root != null) {
+				output.Add (root.item);
+				Preorder(root.leaves[0]);   // leaves[0] is left root
+				Preorder(root.leaves[1]);   // leaves[1] is right root 
+			}
 		}
 
-		public T TLeft() {
-			Console.WriteLine(walker.item);
-			if (walker.leaves[(int)Walk.LEFT] != null) {
-				walker = walker.leaves[(int)Walk.LEFT];
-				TLeft();
-			}
-			else {
-				
-				return walker.item;
-			}
-			
-			return default(T);
+		public void Inorder() {
+			output = new List<T>();
+			output.Clear();
+			Inorder(root);
 		}
 
-		public T TRoot() {
-			Console.WriteLine(walker.item);
-			if (walker.root !=null) {
-				walker = walker.root;
-				return walker.item; 
+		public void Inorder(Node<T> root) {
+			if(root != null) {
+				Inorder(root.leaves[0]);   // leaves[0] is left root
+				output.Add(root.item);
+				Inorder(root.leaves[1]);   // leaves[1] is right root
 			}
-			return default (T);
 		}
-
-		public T TRight() {
-			Console.WriteLine(walker.item);
-			if (walker.leaves[(int)Walk.LEFT] != null) {
-				walker = walker.leaves[(int)Walk.LEFT];
-				TLeft();
-			}
-			else {
-				
-				return walker.item;
-			}
-			
-			return default(T);
-		}
-
 	}
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 
 namespace testRun {
+	/*
 	class Program {
 		private int[] list;
 		private int size;
@@ -72,4 +73,5 @@ namespace testRun {
 			}
 		}
 	}
+ //*/
 }
