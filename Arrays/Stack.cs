@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Arrays {
-	public class Stack<T> where T : IComparable{
+	public class Stack<T> where T : IComparable {
 		//private Node<T> root;
 		private Node<T> head;
 
